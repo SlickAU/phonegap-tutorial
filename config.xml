@@ -24,5 +24,6 @@
     <feature name="http://api.phonegap.com/1.0/notification"/>
     
     <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
+    <gap:plugin name="org.apache.cordova.camera" />
     
 </widget>

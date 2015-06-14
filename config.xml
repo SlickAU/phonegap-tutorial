@@ -15,8 +15,6 @@
         Kevin Jarvis
     </author>
     
-    <gap:plugin name=”org.apache.cordova.contacts” version=”0.2.13″ />
-    
     <feature name="http://api.phonegap.com/1.0/camera"/>
     <feature name="http://api.phonegap.com/1.0/contacts"/>
     <feature name="http://api.phonegap.com/1.0/file"/>
@@ -25,5 +23,6 @@
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
     
- 
+    <gap:plugin name="org.apache.cordova.contacts" version="0.2.13" />
+    
 </widget>

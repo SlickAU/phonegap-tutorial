@@ -1,23 +1,11 @@
 var app = {
 
-    findByName: function() {
-        console.log('findByName');
-        var self = this;
-        
-        this.store.findByName($('.search-key').val(), function(employees) {
-           $('.employee-list').html(self.employeeLiTpl(employees)); 
-        });
-    },
-
     initialize: function() {
         var self = this;
         this.store = new MemoryStore(function() {
-            self.renderHomeView();
+            $('body').html(new HomeView(self.store).render().el);
         });
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
-        
-        this.homeTpl = Handlebars.compile($('#home-tpl').html());
-        this.employeeLiTpl = Handlebars.compile($('#employee-li-tpl').html());
+        this.registerEvents();
     },
     
     showAlert: function(message, title) {
@@ -29,9 +17,24 @@ var app = {
         }
     },
     
-    renderHomeView: function() {
-        $('body').html(this.homeTpl());
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
+    registerEvents: function() {
+        var self = this;
+    
+        if(document.documentElement.hasOwnProperty('ontouchstart')) {
+            $('body').on('touchstart', 'a', function(e) {
+                $(e.target).addClass('tappable-touch');
+            });
+            $('body').on('touchend', 'a', function(e) {
+                $(e.target).removeClass('tappable-touch');   
+            });
+        } else {
+            $('body').on('mousedown', 'a', function(event) {
+                $(event.target).addClass('tappable-active');
+            });
+            $('body').on('mouseup', 'a', function(event) {
+                $(event.target).removeClass('tappable-active');
+            });
+        }
     }
 
 };

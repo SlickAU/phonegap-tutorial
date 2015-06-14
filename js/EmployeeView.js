@@ -35,6 +35,13 @@ var EmployeeView = function(employee) {
         phoneNumbers[0] = new ContactField('work', employee.officePhone, false);
         phoneNumbers[1] = new ContactField('mobile', employee.cellPhone, true);
         contact.phoneNumbers = phoneNumbers;
+        
+        if(employee.image) {
+            var photos = [];
+                photos[0] = employee.image;
+        }
+        contact.photos = photos;
+        
         contact.save();
         return false;
     }

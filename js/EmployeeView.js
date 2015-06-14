@@ -38,7 +38,7 @@ var EmployeeView = function(employee) {
         
         if(employee.image) {
             var photos = [];
-                photos[0] = employee.image;
+                photos[0] = new ContactField('url', employee.image, true);
         }
         contact.photos = photos;
         

@@ -27,7 +27,7 @@ var app = {
         var match = hash.match(app.detailsURL);
         if(match) {
             this.store.findById(Number(match[1]), function(employee) {
-                $('body').html(new EmployeeView().render(employee).el);
+                $('body').html(new EmployeeView(employee).render().el);
             });
         }
     },

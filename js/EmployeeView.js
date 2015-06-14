@@ -1,4 +1,4 @@
-var EmployeeView = function() {
+var EmployeeView = function(employee) {
     
     this.initialize = function() {
         var self = this;
@@ -39,7 +39,7 @@ var EmployeeView = function() {
         return false;
     }
     
-    this.render = function(employee) {
+    this.render = function() {
         this.el.html(EmployeeView.template(employee));
         return this;
     }

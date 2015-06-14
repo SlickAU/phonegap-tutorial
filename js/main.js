@@ -2,8 +2,9 @@ var app = {
 
     initialize: function() {
         var self = this;
+        this.detailsURL = /^#employees\/(\d{1,})/;
         this.store = new MemoryStore(function() {
-            $('body').html(new HomeView(self.store).render().el);
+            self.route();
         });
         this.registerEvents();
     },
@@ -17,15 +18,31 @@ var app = {
         }
     },
     
+    route: function() {
+        var hash = window.location.hash;
+        if(!hash) {
+            $('body').html(new HomeView(this.store).render().el);
+            return;
+        }
+        var match = hash.match(app.detailsURL);
+        if(match) {
+            this.store.findById(Number(match[1]), function(employee) {
+                $('body').html(new EmployeeView().render(employee).el);
+            });
+        }
+    },
+    
     registerEvents: function() {
         var self = this;
+        
+        $(window).on('hashchange', $.proxy(this.route, this));
     
         if(document.documentElement.hasOwnProperty('ontouchstart')) {
             $('body').on('touchstart', 'a', function(e) {
-                $(e.target).addClass('tappable-touch');
+                $(e.target).addClass('tappable-active');
             });
             $('body').on('touchend', 'a', function(e) {
-                $(e.target).removeClass('tappable-touch');   
+                $(e.target).removeClass('tappable-active');   
             });
         } else {
             $('body').on('mousedown', 'a', function(event) {
